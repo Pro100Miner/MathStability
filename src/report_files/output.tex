@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper, margin=1.5cm}
+
+\begin{document}
+
+\section{Отчёт по решению дифференциального уравнения}
+
+\subsection{Исходное уравнение}
+\[ y{\left(t \right)} + \frac{d}{d t} y{\left(t \right)} + \frac{d^{2}}{d t^{2}} y{\left(t \right)} = 0 \]
+
+
+\subsection{Общее решение}
+\[ y{\left(t \right)} = \left(C_{1} \sin{\left(\frac{\sqrt{3} t}{2} \right)} + C_{2} \cos{\left(\frac{\sqrt{3} t}{2} \right)}\right) e^{- \frac{t}{2}} \]
+
+\subsection{Решение задачи Коши}
+Начальные условия:
+\begin{itemize}
+    \item $y(0) = 1$
+    \item $y'(0) = 0$
+\end{itemize}
+
+Решение:
+\[ y{\left(t \right)} = \left(\frac{\sqrt{3} \sin{\left(\frac{\sqrt{3} t}{2} \right)}}{3} + \cos{\left(\frac{\sqrt{3} t}{2} \right)}\right) e^{- \frac{t}{2}} \]
+
+
+\subsection{Значение в точке}
+Значение решения в точке $t = 2.0$:
+\[ y(2.0) = 0.367879441171442 \cos{\left(1.0 \sqrt{3} \right)} + 0.122626480390481 \sqrt{3} \sin{\left(1.0 \sqrt{3} \right)} \approx 0.1506 \]
+
+
+
+
+
+\end{document}

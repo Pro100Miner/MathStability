@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper, margin=1.5cm}
+
+\begin{document}
+
+\section{Отчёт по решению дифференциального уравнения}
+
+\subsection{Исходное уравнение}
+\[ {{ equation }} \]
+
+{% if is_mathieu == False %}
+\subsection{Общее решение}
+\[ {{ general_solution }} \]
+
+\subsection{Решение задачи Коши}
+Начальные условия:
+\begin{itemize}
+    \item $y(0) = {{ initial_conditions.y0 }}$
+    \item $y'(0) = {{ initial_conditions.y0_prime }}$
+\end{itemize}
+
+Решение:
+\[ {{ cauchy_solution }} \]
+
+{% if point_solution %}
+\subsection{Значение в точке}
+Значение решения в точке $t = {{ point_solution.point }}$:
+\[ y({{ point_solution.point }}) = {{ point_solution.exact }} \approx {{ point_solution.approx }} \]
+{% endif %}
+
+{% endif %}
+{% if is_mathieu %}
+\subsection{Поиск зоны устойчивости и неустойчивости: }
+Уравнение находится в {{zones.number}}-й зоне {{zones.is_stability}}
+{% endif %}
+
+\end{document}
