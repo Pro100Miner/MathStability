@@ -45,9 +45,9 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>240</x>
       <y>440</y>
-      <width>171</width>
+      <width>211</width>
       <height>31</height>
      </rect>
     </property>
@@ -260,7 +260,7 @@
    <widget class="QLineEdit" name="point_t">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>260</x>
       <y>370</y>
       <width>41</width>
       <height>31</height>
@@ -430,7 +430,7 @@
      <x>0</x>
      <y>0</y>
      <width>713</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

@@ -5,6 +5,7 @@ import subprocess
 import os
 from jinja2 import Environment, FileSystemLoader
 from src.py_files.calculate_stability_zones import get
+from src.py_files.message_error import show_warning
 
 
 class Report(QWidget):
@@ -18,34 +19,39 @@ class Report(QWidget):
         self.ui.pushButton_2.clicked.connect(self.close)
 
         self.diff_eq, self.general_solution, self.cauchy_solution = self.solve_equation()
+        print(self.general_solution)
         self.create_pdf_report()
+
+
     def solve_equation(self):
         t = sp.symbols('t')
         y = sp.Function('y')
 
-        a, b, c, d = [sp.sympify(self.app_data[i]) for i in ['a', 'b', 'c', 'd']]
-        y0 = sp.sympify(self.app_data['y'])
-        y0_prime = sp.sympify(self.app_data['y_diff'])
+        try:
+            a, b, c, d = [sp.sympify(self.app_data[i]) for i in ['a', 'b', 'c', 'd']]
+            y0 = sp.sympify(self.app_data['y'])
+            y0_prime = sp.sympify(self.app_data['y_diff'])
 
-        # Уравнение с сохранением порядка производных
-        lhs = sp.Add(
-            a * y(t).diff(t, t),
-            b * y(t).diff(t),
-            c * y(t),
-            evaluate=False
-        )
-        diff_eq = sp.Eq(lhs, d)
+            lhs = sp.Add(
+                a * y(t).diff(t, t),
+                b * y(t).diff(t),
+                c * y(t),
+                evaluate=False
+            )
+            diff_eq = sp.Eq(lhs, d)
 
-        general_solution = sp.dsolve(diff_eq)
-        cauchy_solution = sp.dsolve(diff_eq, ics={
-            y(0): y0,
-            y(t).diff(t).subs(t, 0): y0_prime
-        })
+            general_solution = sp.dsolve(diff_eq)
+            cauchy_solution = sp.dsolve(diff_eq, ics={
+                y(0): y0,
+                y(t).diff(t).subs(t, 0): y0_prime
+            })
+        except Exception as e:
+            exc = "Не удалось решить уравнение: " + e
+            show_warning("Ошибка", exc)
 
         return diff_eq, general_solution, cauchy_solution
 
     def create_pdf_report(self):
-        print(self.is_mathieu_equation())
         is_mathieu, a, b = self.is_mathieu_equation()
         if is_mathieu:
             is_stability, number = get(a, b)
@@ -68,24 +74,29 @@ class Report(QWidget):
             }
 
         # Генерация LaTeX
-        env = Environment(
-            loader=FileSystemLoader('src/report_files/templates'),
-            autoescape=True
-        )
+        try:
+            env = Environment(
+                loader=FileSystemLoader('src/report_files/templates'),
+                autoescape=True
+            )
 
-        template = env.get_template('report.j2')
-        rendered_tex = template.render(**context)
+            template = env.get_template('report.j2')
+            rendered_tex = template.render(**context)
 
-        # Сохранение и компиляция
-        os.makedirs('src/report_files', exist_ok=True)
-        tex_path = 'src/report_files/output.tex'
+            # Сохранение и компиляция
+            os.makedirs('src/report_files', exist_ok=True)
+            tex_path = 'src/report_files/output.tex'
+        except Exception as e:
+            exc = "Не удалось создать LaTeX документ: " + e
+            show_warning("Ошибка", exc)
+
 
         with open(tex_path, 'w', encoding='utf-8') as f:
             f.write(rendered_tex)
 
         try:
             subprocess.run([
-                'pdflatex',
+                'C:/Users/Daniil/AppData/Local/Programs/MiKTeX/miktex/bin/x64/pdflatex.exe',
                 '-interaction=nonstopmode',
                 '-output-directory=src/report_files/',
                 tex_path
@@ -98,8 +109,9 @@ class Report(QWidget):
                 except FileNotFoundError:
                     pass
 
-        except subprocess.CalledProcessError as e:
-            print(f"Ошибка компиляции LaTeX: {e}")
+        except Exception as e:
+            exc = f"Ошибка компиляции LaTeX: {e}. Убедитесь, что у вас установлен LaTeX компилятор."
+            show_warning("Ошибка", exc)
 
     def get_point_solution(self):
         if self.point is not None:
@@ -151,5 +163,6 @@ class Report(QWidget):
             return False, None, None
 
         except Exception as e:
-            print(f"Ошибка при анализе уравнения: {e}")
+            exc = f"Ошибка при анализе уравнения: {e}"
+            show_warning("Ошибка", exc)
             return False, None, None

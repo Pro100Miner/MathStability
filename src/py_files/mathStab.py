@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/ui_files/mathStab.ui'
+# Form implementation generated from reading ui file '.\src\ui_files\mathStab.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -25,12 +25,12 @@ class Ui_MainWindow(object):
         MainWindow.setMaximumSize(QtCore.QSize(713, 522))
         MainWindow.setTabletTracking(False)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("src/ui_files/../images/MathStab.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(".\\src\\ui_files\\../images/MathStab.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(260, 440, 171, 31))
+        self.pushButton.setGeometry(QtCore.QRect(240, 440, 211, 31))
         font = QtGui.QFont()
         font.setFamily("CMU Serif")
         font.setPointSize(16)
@@ -147,7 +147,7 @@ class Ui_MainWindow(object):
         self.solution_in_point.setFont(font)
         self.solution_in_point.setObjectName("solution_in_point")
         self.point_t = QtWidgets.QLineEdit(self.centralwidget)
-        self.point_t.setGeometry(QtCore.QRect(240, 370, 41, 31))
+        self.point_t.setGeometry(QtCore.QRect(260, 370, 41, 31))
         font = QtGui.QFont()
         font.setFamily("CMU Serif")
         font.setPointSize(12)
@@ -232,7 +232,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 713, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 713, 26))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
