@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{geometry}
 \geometry{a4paper, margin=1.5cm}
 
@@ -17,13 +18,14 @@
 \[ {{ general_solution }} \]
 
 \subsection{Решение задачи Коши}
-Начальные условия:
-\begin{itemize}
-    \item $y(0) = {{ initial_conditions.y0 }}$
-    \item $y'(0) = {{ initial_conditions.y0_prime }}$
-\end{itemize}
 
-Решение:
+{% if initial_conditions.y0_prime and initial_conditions.y0 %}
+Начальные условия: $y(0) = {{ initial_conditions.y0 }}$; $y'(0) = {{ initial_conditions.y0_prime }}$
+{% elif initial_conditions.y0 %}
+Начальные условия: $y(0) = {{ initial_conditions.y0 }}$
+{% endif %}
+
+\noindent Решение:
 \[ {{ cauchy_solution }} \]
 
 {% if point_solution %}
@@ -31,6 +33,25 @@
 Значение решения в точке $t = {{ point_solution.point }}$:
 \[ y({{ point_solution.point }}) = {{ point_solution.exact }} \approx {{ point_solution.approx }} \]
 {% endif %}
+
+
+{% if solution_graph %}
+\subsection{График решения}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{ {{ solution_graph }} }
+\end{center}
+{% endif %}
+
+{% if phase_portrait %}
+\subsection{Фазовый портрет}
+\begin{center}
+\includegraphics[width=0.4\textwidth]{ {{ phase_portrait }} }
+\end{center}
+{% endif %}
+
+
+
+
 
 {% endif %}
 {% if is_mathieu %}

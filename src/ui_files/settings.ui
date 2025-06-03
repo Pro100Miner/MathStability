@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -115,6 +115,9 @@
          </property>
          <property name="maximum">
           <number>100000</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
          </property>
         </widget>
        </item>
@@ -281,8 +284,31 @@
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>Tab 2</string>
+     <string>Путь до MikTeX</string>
     </attribute>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>311</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>26</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выбрать файл</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QPushButton" name="pushButton">

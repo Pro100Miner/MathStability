@@ -1,6 +1,7 @@
 from src.py_files.settings import Ui_Settings
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QFileDialog
 from PyQt5.QtCore import QSettings
+import getpass
 
 
 class Settings(QWidget):
@@ -35,8 +36,17 @@ class Settings(QWidget):
         self.ui.checkBox_2.stateChanged.connect(lambda: self.change_values(5, 8, self.ui.checkBox_2, "Фазовый портрет"))
         self.load_settings()  # Установить значения
         self.ui.pushButton_2.clicked.connect(self.close_window)  # Закрытие окна
+        self.ui.pushButton_4.clicked.connect(self.select_file)
         self.ui.pushButton.clicked.connect(self.save_settings)  # Сохранение настроек
         self.ui.pushButton_3.clicked.connect(self.reset_settings)  # Сбросить настройки до заводских
+
+    def select_file(self):
+        save_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Выбрать файл",
+            f"C:/Users/{getpass.getuser()}/AppData/Local/Programs/MiKTeX/miktex/bin/x64/pdflatex.exe",
+        )
+        self.ui.lineEdit.setText(save_path)
 
     def save_settings(self):
         settings = QSettings("Math", "MathStab")
@@ -44,7 +54,9 @@ class Settings(QWidget):
         for key, widget in self.settings_mapping.items():
             settings.setValue(key, widget.value())
         settings.endGroup()
-
+        settings.beginGroup("Settings")
+        settings.setValue('path_to_tex', self.ui.lineEdit.text())
+        settings.endGroup()
         self.ui.label.setText("Данные сохранены")
         self.ui.label.setStyleSheet("color: green;")
 
@@ -53,6 +65,10 @@ class Settings(QWidget):
         settings.beginGroup("PlotSettings")
         for key, widget in self.settings_mapping.items():
             widget.setValue(settings.value(key, defaultValue=self.default_settings[key], type=int))
+        settings.endGroup()
+        settings.beginGroup("Settings")
+        path = f"C:/Users/{getpass.getuser()}/AppData/Local/Programs/MiKTeX/miktex/bin/x64/pdflatex.exe"
+        self.ui.lineEdit.setText(settings.value('path_to_tex', defaultValue=path))
         settings.endGroup()
 
     def reset_settings(self):

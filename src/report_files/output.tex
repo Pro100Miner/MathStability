@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{geometry}
 \geometry{a4paper, margin=1.5cm}
 
@@ -17,19 +18,33 @@
 \[ y{\left(t \right)} = \left(C_{1} \sin{\left(\frac{\sqrt{3} t}{2} \right)} + C_{2} \cos{\left(\frac{\sqrt{3} t}{2} \right)}\right) e^{- \frac{t}{2}} \]
 
 \subsection{Решение задачи Коши}
-Начальные условия:
-\begin{itemize}
-    \item $y(0) = 1$
-    \item $y'(0) = 0$
-\end{itemize}
 
-Решение:
+
+Начальные условия: $y(0) = 1$; $y'(0) = 0$
+
+
+\noindent Решение:
 \[ y{\left(t \right)} = \left(\frac{\sqrt{3} \sin{\left(\frac{\sqrt{3} t}{2} \right)}}{3} + \cos{\left(\frac{\sqrt{3} t}{2} \right)}\right) e^{- \frac{t}{2}} \]
 
 
-\subsection{Значение в точке}
-Значение решения в точке $t = 2.0$:
-\[ y(2.0) = 0.367879441171442 \cos{\left(1.0 \sqrt{3} \right)} + 0.122626480390481 \sqrt{3} \sin{\left(1.0 \sqrt{3} \right)} \approx 0.1506 \]
+
+
+
+\subsection{График решения}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{ src/report_files/graph_solution.png }
+\end{center}
+
+
+
+\subsection{Фазовый портрет}
+\begin{center}
+\includegraphics[width=0.4\textwidth]{ src/report_files/phase_portrait.png }
+\end{center}
+
+
+
+
 
 
 
